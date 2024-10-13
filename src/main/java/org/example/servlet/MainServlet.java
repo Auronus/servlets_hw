@@ -1,7 +1,7 @@
 package org.example.servlet;
 
 import org.example.controller.PostController;
-import org.example.repository.PostRepository;
+import org.example.repository.PostRepositoryImpl;
 import org.example.service.PostService;
 
 import javax.servlet.http.HttpServlet;
@@ -14,7 +14,7 @@ public class MainServlet extends HttpServlet {
 
     @Override
     public void init() {
-        final var repository = new PostRepository();
+        final var repository = new PostRepositoryImpl();
         final var service = new PostService(repository);
         controller = new PostController(service);
     }
