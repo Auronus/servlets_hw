@@ -1,45 +1,16 @@
 package org.example.repository;
 
-import org.example.exception.NotFoundException;
 import org.example.model.Post;
 
-import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.List;
+import java.util.Optional;
 
-// Stub
-public class PostRepository {
+public interface PostRepository {
+    List<Post> all();
 
-    private final AtomicLong postId = new AtomicLong(1);
-    Map<Long, Post> posts = new ConcurrentHashMap<Long, Post>();
+    Optional<Post> getById(long id);
 
-    public List<Post> all() {
-        return new ArrayList<>(posts.values());
-    }
+    Post save(Post post);
 
-    public Optional<Post> getById(long id) {
-        return Optional.ofNullable(posts.get(id));
-    }
-
-    public Post save(Post post) {
-        if (post.getId() == 0) {
-            long id = postId.getAndIncrement();
-            post.setId(id);
-            posts.put(id, post);
-            return post;
-        }
-        if (posts.containsKey(post.getId())) {
-            posts.put(post.getId(), post);
-            return post;
-        }
-        throw new NotFoundException("Post not found");
-    }
-
-    public void removeById(long id) {
-      if (posts.containsKey(id)) {
-        posts.remove(id);
-        return;
-      }
-      throw new NotFoundException("Post not found");
-    }
+    void removeById(long id);
 }
