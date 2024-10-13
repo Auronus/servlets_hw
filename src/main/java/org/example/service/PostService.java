@@ -2,14 +2,14 @@ package org.example.service;
 
 import org.example.exception.NotFoundException;
 import org.example.model.Post;
-import org.example.repository.PostRepository;
+import org.example.repository.PostRepositoryImpl;
 
 import java.util.List;
 
 public class PostService {
-  private final PostRepository repository;
+  private final PostRepositoryImpl repository;
 
-  public PostService(PostRepository repository) {
+  public PostService(PostRepositoryImpl repository) {
     this.repository = repository;
   }
 
